@@ -11,6 +11,8 @@ import '../styles/auth.scss'
 import { Button } from '../components/Button'
 import { useAuth } from '../hooks/useAuth'
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export function Home() {
 
     const history = useHistory()
@@ -34,12 +36,12 @@ export function Home() {
         const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
         if (!roomRef.exists()) {
-            alert('Room does not exists.')
+            toast.error('Room already exists.')
             return
         }
 
         if (roomRef.val().endedAt) {
-            alert('Room already closed.')
+            toast.error('Room already closed.')
             return
         }
 
@@ -74,6 +76,13 @@ export function Home() {
                     </form>
                 </div>
             </main>
+            <Toaster
+                toastOptions={{
+                    error: {
+                        className: 'toast-error'
+                    },
+                }}
+            />
         </div>
     )
 }

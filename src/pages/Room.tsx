@@ -1,7 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useHistory } from 'react-router-dom'
-
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import logoImg from '../assets/images/logo.svg'
 import { Button } from '../components/Button'
@@ -64,15 +62,11 @@ export function Room() {
         }
     }
 
-    function goToHome() {
-        history.push('/rooms/new')
-    }
-
     return (
         <div id="page-room">
             <header>
                 <div className="content">
-                    <img src={logoImg} alt="Letmeask" onClick={goToHome} />
+                    <img src={logoImg} alt="Letmeask" onClick={() => { history.push('/') }} />
                     <RoomCode code={roomId} />
                 </div>
             </header>
